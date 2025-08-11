@@ -9,7 +9,7 @@ import { ChooseUs } from "./components/chooseus"
 export const HomePage =()=>{
     return(
         <>
-         <Loading/> 
+         {/* <Loading/>  */}
         <Heroection/>
         <Services/>
         <AboutUs/>

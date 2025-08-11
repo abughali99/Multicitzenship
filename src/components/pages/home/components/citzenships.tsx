@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import "swiper/css";
@@ -49,6 +50,7 @@ export const Citizenship = () => {
 
   return (
     <section className="Citizenship bg-[#242058] py-10 relative">
+      {/* Background Logo */}
       <Image
         src={logo}
         width={350}
@@ -56,18 +58,39 @@ export const Citizenship = () => {
         alt="background logo"
         className="absolute bottom-6 right-0 opacity-10 z-0"
       />
+
       <div className="max-w-7xl mx-auto relative z-10 px-4">
-        <h2 className="text-white text-3xl sm:text-5xl md:text-6xl font-bold mb-4">
+        {/* Section Heading */}
+        <motion.h2
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-white text-3xl sm:text-5xl md:text-6xl font-bold mb-4"
+        >
           Citizenship Programs
-        </h2>
-        <p className="text-gray-400">Some programs offer a pathway to a second option</p>
+        </motion.h2>
+
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="text-gray-400"
+        >
+          Some programs offer a pathway to a second option
+        </motion.p>
 
         {/* Desktop Grid */}
         <div className="hidden md:flex flex-wrap gap-10 justify-center text-white py-5">
           {countries.map((country, index) => (
-            <a
+            <motion.a
               key={index}
               href={country.link}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.15 }}
               className="flex flex-col items-center text-center w-48 p-4"
             >
               <Image
@@ -77,7 +100,7 @@ export const Citizenship = () => {
               />
               <h3 className="text-lg font-semibold">{country.name}</h3>
               <p className="text-sm opacity-80 mt-1">{country.description}</p>
-            </a>
+            </motion.a>
           ))}
         </div>
 
@@ -94,19 +117,22 @@ export const Citizenship = () => {
           >
             {countries.map((country, index) => (
               <SwiperSlide key={index}>
-                    <a
-              key={index}
-              href={country.link}
-              className="flex flex-col items-center text-center w-48 p-4"
-            >
-              <Image
-                src={country.logo}
-                alt={`${country.name} flag`}
-                className="w-16 h-16 mb-3 object-cover"
-              />
-              <h3 className="text-lg font-semibold">{country.name}</h3>
-              <p className="text-sm opacity-80 mt-1">{country.description}</p>
-            </a>
+                <motion.a
+                  href={country.link}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5 }}
+                  className="flex flex-col items-center text-center w-48 p-4 mx-auto"
+                >
+                  <Image
+                    src={country.logo}
+                    alt={`${country.name} flag`}
+                    className="w-16 h-16 mb-3 object-cover"
+                  />
+                  <h3 className="text-lg font-semibold">{country.name}</h3>
+                  <p className="text-sm opacity-80 mt-1">{country.description}</p>
+                </motion.a>
               </SwiperSlide>
             ))}
           </Swiper>
