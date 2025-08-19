@@ -3,6 +3,8 @@ import { Tajawal } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
+import { WhatsAppFloat } from "@/components/ui/whatsappicon";
+import { PobUp } from "@/components/ui/poub";
 
 const tajawal = Tajawal({
   subsets: ["arabic", "latin"],
@@ -22,9 +24,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={tajawal.className}>
-      <body className="antialiased">
+      <body className="antialiased relative">
         <Header />
         {children}
+          <WhatsAppFloat
+        phoneNumber="+962792919995"
+      />
+      <PobUp/>
         <Footer/>
       </body>
     </html>

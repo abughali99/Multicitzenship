@@ -63,7 +63,7 @@ export const ChooseUs = () => {
             Why Choose
             <span className="text-[#d8a16f]"> Us</span>
           </h2>
-          <h3 className="text-5xl sm:text-7xl md:text-5xl font-bold my-4">
+          <h3 className="text-5xl sm:text-7xl md:text-5xl font-bold my-4 text-[#a7a7a7]">
             Reasons to Choose Multicitizenships
           </h3>
           <p className="text-gray-400">

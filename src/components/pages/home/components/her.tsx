@@ -52,7 +52,7 @@ export const Heroection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.6 }}
         >
-          <Image src={icon} width={100} height={50} alt="icon" className="ms-[40%]" />
+          <Image src={icon} width={100} height={50} alt="icon" className="ms-[160%]" />
         </motion.div>
 
         {/* Description */}

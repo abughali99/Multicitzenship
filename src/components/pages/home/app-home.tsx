@@ -5,14 +5,16 @@ import { Services } from "./components/services"
 import { Citizenship } from "./components/citzenships"
 import { Residency } from "./components/residency"
 import { ChooseUs } from "./components/chooseus"
+import CallbackForm from "./components/request-form"
 
 export const HomePage =()=>{
     return(
         <>
-        <Loading/>
+        {/* <Loading/> */}
         <Heroection/>
         <Services/>
         <AboutUs/>
+        <CallbackForm/>
         <Citizenship/>
         <Residency/>
         <ChooseUs/>
