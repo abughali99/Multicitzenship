@@ -30,7 +30,7 @@ export default function EnhancedHeader() {
 
   const navigationItems = [
     { href: "/", label: "Home" },
-    { href: "/about", label: "About Us" },
+    { href: "/aboutus", label: "About Us" },
     { href: "/programs", label: "Programs" },
     { href: "/blog", label: "Blog & News" },
     { href: "/contact", label: "Contact Us" },
