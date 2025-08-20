@@ -1,7 +1,6 @@
 "use client"
 import { useState } from "react";
 import { Button } from "./button";
-import CallbackForm from "../pages/home/components/request-form";
 import { X } from "lucide-react";
 
 export const PobUp = () => {
@@ -28,7 +27,7 @@ export const PobUp = () => {
             >
               <X size={20} />
             </button>
-         <CallbackForm/>
+         {/* <CallbackForm/> */}
         
           </div>
         </div>
