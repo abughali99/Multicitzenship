@@ -36,7 +36,7 @@ export const HeroAboutus = () => {
         <div className="absolute top-1/3 right-1/4 w-6 h-6 bg-[#d8a16f] rounded-full opacity-20 animate-float animation-delay-2000"></div>
         <div className="absolute bottom-1/4 left-1/3 w-3 h-3 bg-[#d8a16f] rounded-full opacity-30 animate-float animation-delay-4000">
         </div>
-                <Image src={logo} alt="logo" width={100} height={100} className='absolute bottom-0 left-0 opacity-[0.3] w-[280px]'/>
+                <Image src={logo} alt="logo" width={100} height={100} className='absolute bottom-0 left-0 opacity-[0.3] w-[230px]'/>
 
       </section>
 
