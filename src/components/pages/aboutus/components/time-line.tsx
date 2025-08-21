@@ -117,149 +117,148 @@ export function CompanyTimeline() {
 
   return (
     <section className="bg-muted/30">
-
-    <section className="py-24 px-6 max-w-7xl mx-auto ">
-      <div className="text-center mb-20">
- 
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold mb-6 tracking-tight" style={{ color: "#242058" }}>
-          Company Timeline
-        </h2>
-        <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto font-light leading-relaxed">
-          Charting Success Through Time: Your Journey, Our Legacy
-        </p>
-      </div>
-
-      {/* Timeline */}
-      <div className="relative" ref={timelineRef}>
-        <div className="absolute left-1/2 transform -translate-x-1/2 w-0.5 h-full">
-          {/* Background line */}
-          <div className="w-full h-full bg-gray-200 rounded-full" />
-          <div
-            className="absolute top-0 left-0 w-full rounded-full transition-all duration-500 ease-out"
-            style={{
-              backgroundColor: "#d8a16f",
-              height: `${scrollProgress * 100}%`,
-              boxShadow: scrollProgress > 0 ? "0 0 8px rgba(216, 161, 111, 0.3)" : "none",
-            }}
-          />
+      <section className="py-24 px-6 max-w-7xl mx-auto ">
+        <div className="text-center mb-20">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold mb-6 tracking-tight" style={{ color: "#242058" }}>
+            Company Timeline
+          </h2>
+          <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto font-light leading-relaxed">
+            Charting Success Through Time: Your Journey, Our Legacy
+          </p>
         </div>
 
-        {/* Timeline items */}
-        <div className="space-y-20">
-          {timelineData.map((item, index) => (
+        {/* Timeline */}
+        <div className="relative" ref={timelineRef}>
+          <div className="absolute left-1/2 transform -translate-x-1/2 w-0.5 h-full">
+            {/* Background line */}
+            <div className="w-full h-full bg-gray-200 rounded-full" />
             <div
-              key={index}
-              className="relative flex items-center"
-              ref={(el) => (itemRefs.current[index] = el)}
-              data-index={index}
-            >
+              className="absolute top-0 left-0 w-full rounded-full transition-all duration-500 ease-out"
+              style={{
+                backgroundColor: "#d8a16f",
+                height: `${scrollProgress * 100}%`,
+                boxShadow: scrollProgress > 0 ? "0 0 8px rgba(216, 161, 111, 0.3)" : "none",
+              }}
+            />
+          </div>
+
+          {/* Timeline items */}
+          <div className="space-y-20">
+            {timelineData.map((item, index) => (
               <div
-                className={`absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full border-4 border-white shadow-md z-10 transition-all duration-500 ${
-                  visibleItems.has(index) ? "scale-100 opacity-100" : "scale-75 opacity-50"
-                }`}
-                style={{ backgroundColor: visibleItems.has(index) ? "#d8a16f" : "#e5e7eb" }}
-              />
-
-              {/* Content */}
-              <div className={`w-1/2 ${item.side === "right" ? "ml-auto pl-16" : "pr-16"}`}>
-                <div
-                  className={`bg-white rounded-lg shadow-sm border border-gray-100 p-8 hover:shadow-lg transition-all duration-700 hover:-translate-y-1 ${
-                    item.side === "left" ? "text-left" : ""
-                  } ${
-                    visibleItems.has(index)
-                      ? "opacity-100 translate-x-0"
-                      : `opacity-0 ${item.side === "left" ? "translate-x-8" : "-translate-x-8"}`
-                  }`}
-                >
-                  <div
-                    className={`inline-flex items-center justify-center w-14 h-14 rounded-lg mb-6 shadow-sm ${item.side === "left" ? "ml-auto" : ""}`}
-                    style={{ backgroundColor: "#242058" }}
-                  >
-                    <item.icon className="w-7 h-7 text-white" />
-                  </div>
-
-                  <div
-                    className={`inline-block px-4 py-1.5 rounded-md text-xs font-semibold tracking-wide uppercase mb-5 ${item.side === "left" ? "ml-auto block" : ""}`}
-                    style={{ backgroundColor: "#d8a16f", color: "white" }}
-                  >
-                    {item.year}
-                  </div>
-
-                  <h3 className="text-xl font-semibold mb-2 tracking-tight" style={{ color: "#242058" }}>
-                    {item.title}
-                  </h3>
-
-                  {/* Location */}
-                  <p className="text-sm font-medium mb-4 opacity-80" style={{ color: "#d8a16f" }}>
-                    {item.location}
-                  </p>
-
-                  <h4 className="text-lg font-medium mb-4 leading-tight" style={{ color: "#242058" }}>
-                    {item.subtitle}
-                  </h4>
-
-                  <p className="text-gray-700 leading-relaxed text-sm font-light">{item.description}</p>
-                </div>
-              </div>
-
-              <div
-                className={`md:hidden absolute inset-0 transition-all duration-700 ${
-                  visibleItems.has(index) ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-4"
-                }`}
+                key={index}
+                className="relative flex items-center"
+                ref={(el) => {
+                  if (el) itemRefs.current[index] = el
+                }}
+                data-index={index}
               >
-                <div className="pl-14 w-full">
-                  <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
-                    {/* Icon */}
+                <div
+                  className={`absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full border-4 border-white shadow-md z-10 transition-all duration-500 ${
+                    visibleItems.has(index) ? "scale-100 opacity-100" : "scale-75 opacity-50"
+                  }`}
+                  style={{ backgroundColor: visibleItems.has(index) ? "#d8a16f" : "#e5e7eb" }}
+                />
+
+                {/* Content */}
+                <div className={`w-1/2 ${item.side === "right" ? "ml-auto pl-16" : "pr-16"}`}>
+                  <div
+                    className={`bg-white rounded-lg shadow-sm border border-gray-100 p-8 hover:shadow-lg transition-all duration-700 hover:-translate-y-1 ${
+                      item.side === "left" ? "text-left" : ""
+                    } ${
+                      visibleItems.has(index)
+                        ? "opacity-100 translate-x-0"
+                        : `opacity-0 ${item.side === "left" ? "translate-x-8" : "-translate-x-8"}`
+                    }`}
+                  >
                     <div
-                      className="inline-flex items-center justify-center w-12 h-12 rounded-lg mb-4 shadow-sm"
+                      className={`inline-flex items-center justify-center w-14 h-14 rounded-lg mb-6 shadow-sm ${item.side === "left" ? "ml-auto" : ""}`}
                       style={{ backgroundColor: "#242058" }}
                     >
-                      <item.icon className="w-6 h-6 text-white" />
+                      <item.icon className="w-7 h-7 text-white" />
                     </div>
 
-                    {/* Year badge */}
                     <div
-                      className="inline-block px-3 py-1 rounded-md text-xs font-semibold tracking-wide uppercase mb-4"
+                      className={`inline-block px-4 py-1.5 rounded-md text-xs font-semibold tracking-wide uppercase mb-5 ${item.side === "left" ? "ml-auto block" : ""}`}
                       style={{ backgroundColor: "#d8a16f", color: "white" }}
                     >
                       {item.year}
                     </div>
 
-                    {/* Title */}
-                    <h3 className="text-lg font-semibold mb-2 tracking-tight" style={{ color: "#242058" }}>
+                    <h3 className="text-xl font-semibold mb-2 tracking-tight" style={{ color: "#242058" }}>
                       {item.title}
                     </h3>
 
                     {/* Location */}
-                    <p className="text-xs font-medium mb-3 opacity-80" style={{ color: "#d8a16f" }}>
+                    <p className="text-sm font-medium mb-4 opacity-80" style={{ color: "#d8a16f" }}>
                       {item.location}
                     </p>
 
-                    {/* Subtitle */}
-                    <h4 className="text-base font-medium mb-3 leading-tight" style={{ color: "#242058" }}>
+                    <h4 className="text-lg font-medium mb-4 leading-tight" style={{ color: "#242058" }}>
                       {item.subtitle}
                     </h4>
 
-                    {/* Description */}
-                    <p className="text-gray-700 text-sm leading-relaxed font-light">{item.description}</p>
+                    <p className="text-gray-700 leading-relaxed text-sm font-light">{item.description}</p>
+                  </div>
+                </div>
+
+                <div
+                  className={`md:hidden absolute inset-0 transition-all duration-700 ${
+                    visibleItems.has(index) ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-4"
+                  }`}
+                >
+                  <div className="pl-14 w-full">
+                    <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
+                      {/* Icon */}
+                      <div
+                        className="inline-flex items-center justify-center w-12 h-12 rounded-lg mb-4 shadow-sm"
+                        style={{ backgroundColor: "#242058" }}
+                      >
+                        <item.icon className="w-6 h-6 text-white" />
+                      </div>
+
+                      {/* Year badge */}
+                      <div
+                        className="inline-block px-3 py-1 rounded-md text-xs font-semibold tracking-wide uppercase mb-4"
+                        style={{ backgroundColor: "#d8a16f", color: "white" }}
+                      >
+                        {item.year}
+                      </div>
+
+                      {/* Title */}
+                      <h3 className="text-lg font-semibold mb-2 tracking-tight" style={{ color: "#242058" }}>
+                        {item.title}
+                      </h3>
+
+                      {/* Location */}
+                      <p className="text-xs font-medium mb-3 opacity-80" style={{ color: "#d8a16f" }}>
+                        {item.location}
+                      </p>
+
+                      {/* Subtitle */}
+                      <h4 className="text-base font-medium mb-3 leading-tight" style={{ color: "#242058" }}>
+                        {item.subtitle}
+                      </h4>
+
+                      {/* Description */}
+                      <p className="text-gray-700 text-sm leading-relaxed font-light">{item.description}</p>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
 
-      <div className="mt-20 text-center">
-        <div
-          className="inline-flex items-center justify-center w-8 h-8 rounded-full shadow-sm"
-          style={{ backgroundColor: "#d8a16f" }}
-        >
-          <div className="w-2 h-2 rounded-full bg-white opacity-90" />
+        <div className="mt-20 text-center">
+          <div
+            className="inline-flex items-center justify-center w-8 h-8 rounded-full shadow-sm"
+            style={{ backgroundColor: "#d8a16f" }}
+          >
+            <div className="w-2 h-2 rounded-full bg-white opacity-90" />
+          </div>
         </div>
-      </div>
+      </section>
     </section>
-    </section>
-
   )
 }
