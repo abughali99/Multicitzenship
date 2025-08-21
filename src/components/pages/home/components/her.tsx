@@ -1,13 +1,15 @@
 "use client";
-import hero from "@/assets/images/stock-photo-passports-of-two-caribbean-states-saint-kitts-and-nevis-and-dominica-on-a-map-of-the-caribbean-sea-1950319306-transformed-1.jpeg";
+// import hero from "@/assets/images/stock-photo-passports-of-two-caribbean-states-saint-kitts-and-nevis-and-dominica-on-a-map-of-the-caribbean-sea-1950319306-transformed-1.jpeg";
+import hero from "@/assets/images/passports.png";
 import Image from "next/image";
 import icon from "@/assets/icons/divider-beige.svg";
+import '@/components/pages/aboutus/about.css'
 import { motion } from "framer-motion";
 
 export const Heroection = () => {
   return (
     <section
-      className="relative h-[60vh] bg-cover bg-center bg-no-repeat"
+      className="relative h-[70vh] bg-cover bg-center bg-no-repeat"
       style={{ backgroundImage: `url(${hero.src})` }}
     >
       {/* Overlay */}
@@ -76,6 +78,10 @@ export const Heroection = () => {
           Get Your Consultation
         </motion.button>
       </div>
+         <div className="absolute top-1/4 left-1/5 w-4 h-4 bg-white rounded-full opacity-20 animate-float"></div>
+        <div className="absolute top-1/3 right-1/4 w-6 h-6 bg-[#d8a16f] rounded-full opacity-20 animate-float animation-delay-2000"></div>
+        <div className="absolute bottom-1/4 left-1/3 w-3 h-3 bg-[#d8a16f] rounded-full opacity-30 animate-float animation-delay-4000">
+        </div>
     </section>
   );
 };

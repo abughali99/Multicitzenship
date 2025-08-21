@@ -1,254 +1,221 @@
-// "use client"
+'use client';
 
-// import { useState } from "react"
-// import { Formik, Form, Field, ErrorMessage, FormikHelpers } from "formik"
-// import * as Yup from "yup"
-// import { allCountries } from "country-telephone-data"
-// import { Loader2, Phone, Mail, User, Globe, DollarSign, MessageSquare } from "lucide-react"
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import Swal from 'sweetalert2';
 
-// const validationSchema = Yup.object({
-//   firstName: Yup.string().min(2, "First name must be at least 2 characters").required("First name is required"),
-//   lastName: Yup.string().min(2, "Last name must be at least 2 characters").required("Last name is required"),
-//   phone: Yup.string().min(6, "Please enter a valid phone number").required("Phone number is required"),
-//   countryCode: Yup.string().required("Please select a country code"),
-//   email: Yup.string().email("Please enter a valid email address").required("Email is required"),
-//   nationality: Yup.string().required("Please select your nationality"),
-//   investmentFeasible: Yup.string().required("Please select an option"),
-//   message: Yup.string(),
-// })
+const CallbackForm = () => {
+  // Form validation schema
+  const validationSchema = Yup.object({
+    firstName: Yup.string()
+      .required('First name is required')
+      .min(2, 'First name must be at least 2 characters'),
+    lastName: Yup.string()
+      .required('Last name is required')
+      .min(2, 'Last name must be at least 2 characters'),
+    phone: Yup.string()
+      .required('Phone number is required')
+      .matches(/^[0-9+\-\s()]+$/, 'Please enter a valid phone number'),
+    email: Yup.string()
+      .email('Please enter a valid email address')
+      .required('Email is required'),
+    nationality: Yup.string()
+      .required('Nationality is required'),
+    investmentFeasible: Yup.string()
+      .required('Please select an option')
+      .oneOf(['yes', 'no'], 'Please select either Yes or No')
+  });
 
-// // Fixed flag generation function
-// const getFlagEmoji = (iso2) => {
-//   if (!iso2) return "🌍";
-//   return String.fromCodePoint(...[...iso2.toUpperCase()].map(c => 0x1F1A5 + c.charCodeAt(0)));
-// }
+  // Formik hook
+  const formik = useFormik({
+    initialValues: {
+      firstName: '',
+      lastName: '',
+      phone: '',
+      email: '',
+      nationality: '',
+      investmentFeasible: ''
+    },
+    validationSchema,
+    onSubmit: (values) => {
+      console.log('Form submitted:', values);
+      
+      // Show success message with SweetAlert
+      Swal.fire({
+        title: 'Success!',
+        text: 'Your inquiry has been submitted successfully.',
+        icon: 'success',
+        confirmButtonColor: '#242058',
+        confirmButtonText: 'OK'
+      });
+    }
+  });
 
-// export const countries = allCountries.map((country) => {
-//   const [name, iso2, dialCode] = Array.isArray(country) ? country : ["", "", ""]
-//   const flag = getFlagEmoji(iso2)
-//   return {
-//     code: dialCode ? `+${dialCode}` : "",
-//     name: name || "",
-//     flag,
-//     iso2: iso2 || ""
-//   }
-// }).filter(country => country.iso2)
+  return (
+    <div className="">
+      <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">
+        <div className="p-8 md:p-4">
+          <div className="bg-[#242058] text-white p-6 rounded-lg mb-8 md:p-2">
+            <h2 className="text-2xl font-bold text-center">Request A Call Back</h2>
+            <p className="text-[#d8a16f] text-center mt-2">
+              Let's discuss your investment opportunities
+            </p>
+          </div>
 
-// const nationalities = [
-//   "Afghan", "Albanian", "Algerian", "American", "Andorran", "Angolan", "Antiguans", "Argentinean", 
-//   "Armenian", "Australian", "Austrian", "Azerbaijani", "Bahamian", "Bahraini", "Bangladeshi", 
-//   "Barbadian", "Barbudans", "Batswana", "Belarusian", "Belgian", "Belizean", "Beninese", "Bhutanese", 
-//   "Bolivian", "Bosnian", "Brazilian", "British", "Bruneian", "Bulgarian", "Burkinabe", "Burmese", 
-//   "Burundian", "Cambodian", "Cameroonian", "Canadian", "Cape Verdean", "Central African", "Chadian", 
-//   "Chilean", "Chinese", "Colombian", "Comoran", "Congolese", "Costa Rican", "Croatian", "Cuban", 
-//   "Cypriot", "Czech", "Danish", "Djibouti", "Dominican", "Dutch", "East Timorese", "Ecuadorean", 
-//   "Egyptian", "Emirian", "Equatorial Guinean", "Eritrean", "Estonian", "Ethiopian", "Fijian", 
-//   "Filipino", "Finnish", "French", "Gabonese", "Gambian", "Georgian", "German", "Ghanaian", 
-//   "Greek", "Grenadian", "Guatemalan", "Guinea-Bissauan", "Guinean", "Guyanese", "Haitian", 
-//   "Herzegovinian", "Honduran", "Hungarian", "I-Kiribati", "Icelander", "Indian", "Indonesian", 
-//   "Iranian", "Iraqi", "Irish", "Israeli", "Italian", "Ivorian", "Jamaican", "Japanese", "Jordanian", 
-//   "Kazakhstani", "Kenyan", "Kittian and Nevisian", "Kuwaiti", "Kyrgyz", "Laotian", "Latvian", 
-//   "Lebanese", "Liberian", "Libyan", "Liechtensteiner", "Lithuanian", "Luxembourger", "Macedonian", 
-//   "Malagasy", "Malawian", "Malaysian", "Maldivian", "Malian", "Maltese", "Marshallese", "Mauritanian", 
-//   "Mauritian", "Mexican", "Micronesian", "Moldovan", "Monacan", "Mongolian", "Moroccan", 
-//   "Mosotho", "Motswana", "Mozambican", "Namibian", "Nauruan", "Nepalese", "New Zealander", 
-//   "Nicaraguan", "Nigerian", "Nigerien", "North Korean", "Northern Irish", "Norwegian", "Omani", 
-//   "Pakistani", "Palauan", "Panamanian", "Papua New Guinean", "Paraguayan", "Peruvian", "Polish", 
-//   "Portuguese", "Qatari", "Romanian", "Russian", "Rwandan", "Saint Lucian", "Salvadoran", "Samoan", 
-//   "San Marinese", "Sao Tomean", "Saudi", "Scottish", "Senegalese", "Serbian", "Seychellois", 
-//   "Sierra Leonean", "Singaporean", "Slovakian", "Slovenian", "Solomon Islander", "Somali", 
-//   "South African", "South Korean", "Spanish", "Sri Lankan", "Sudanese", "Surinamer", "Swazi", 
-//   "Swedish", "Swiss", "Syrian", "Taiwanese", "Tajik", "Tanzanian", "Thai", "Togolese", "Tongan", 
-//   "Trinidadian or Tobagonian", "Tunisian", "Turkish", "Tuvaluan", "Ugandan", "Ukrainian", 
-//   "Uruguayan", "Uzbekistani", "Venezuelan", "Vietnamese", "Welsh", "Yemenite", "Zambian", "Zimbabwean"
-// ]
+          <form onSubmit={formik.handleSubmit} className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label htmlFor="firstName" className="block text-sm font-medium text-gray-700">
+                  First Name <span className='text-red-500'>*</span>
+                </label>
+                <input
+                  id="firstName"
+                  name="firstName"
+                  type="text"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.firstName}
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#d8a16f] focus:border-[#d8a16f]"
+                />
+                {formik.touched.firstName && formik.errors.firstName ? (
+                  <div className="text-red-500 text-sm mt-1">{formik.errors.firstName}</div>
+                ) : null}
+              </div>
 
-// export default function CallbackForm() {
-//   const [isSubmitting, setIsSubmitting] = useState(false)
+              <div>
+                <label htmlFor="lastName" className="block text-sm font-medium text-gray-700">
+                  Last Name <span className='text-red-500'>*</span>
+                </label>
+                <input
+                  id="lastName"
+                  name="lastName"
+                  type="text"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.lastName}
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#d8a16f] focus:border-[#d8a16f]"
+                />
+                {formik.touched.lastName && formik.errors.lastName ? (
+                  <div className="text-red-500 text-sm mt-1">{formik.errors.lastName}</div>
+                ) : null}
+              </div>
+            </div>
 
-//   const initialValues = {
-//     firstName: "",
-//     lastName: "",
-//     phone: "",
-//     countryCode: "",
-//     email: "",
-//     nationality: "",
-//     investmentFeasible: "",
-//     message: "",
-//   }
+            {/* Phone */}
+            <div>
+              <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
+                Phone Number<span className='text-red-500'>*</span>
+              </label>
+              <input
+                id="phone"
+                name="phone"
+                type="tel"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.phone}
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#d8a16f] focus:border-[#d8a16f]"
+              />
+              {formik.touched.phone && formik.errors.phone ? (
+                <div className="text-red-500 text-sm mt-1">{formik.errors.phone}</div>
+              ) : null}
+            </div>
 
-//   const handleSubmit = async (
-//     values: typeof initialValues,
-//     { resetForm }: FormikHelpers<typeof initialValues>
-//   ) => {
-//     setIsSubmitting(true)
-//     await new Promise((resolve) => setTimeout(resolve, 2000))
-//     console.log("Form submitted:", values)
-//     alert("Request submitted successfully! We'll contact you within 24 hours.")
-//     resetForm()
-//     setIsSubmitting(false)
-//   }
+            {/* Email */}
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                Email Address <span className='text-red-500'>*</span>
+              </label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.email}
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#d8a16f] focus:border-[#d8a16f]"
+              />
+              {formik.touched.email && formik.errors.email ? (
+                <div className="text-red-500 text-sm mt-1">{formik.errors.email}</div>
+              ) : null}
+            </div>
 
-//   return (
-//     <div className="bg-gradient-to-br from-[#fdfcfb] to-[#f7f7f9] p-4 flex items-center justify-center min-h-screen">
-//       <div className="w-full max-w-2xl bg-white shadow-xl rounded-xl p-8">
-//         <div className="text-center mb-8">
-//           <h2 className="text-3xl font-bold text-[#242058]">
-//             Request A Call Back
-//           </h2>
-//           <p className="text-lg text-slate-600">
-//             Let's discuss your investment opportunities. Fill out the form below and we'll contact you shortly.
-//           </p>
-//         </div>
+            {/* Nationality */}
+            <div>
+              <label htmlFor="nationality" className="block text-sm font-medium text-gray-700">
+                Nationality <span className='text-red-500'>*</span>
+              </label>
+              <select
+                id="nationality"
+                name="nationality"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.nationality}
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#d8a16f] focus:border-[#d8a16f]"
+              >
+                <option value="">Select your nationality</option>
+                <option value="US">United States</option>
+                <option value="UK">United Kingdom</option>
+                <option value="CA">Canada</option>
+                <option value="AU">Australia</option>
+                <option value="DE">Germany</option>
+                <option value="FR">France</option>
+                <option value="OTHER">Other</option>
+              </select>
+              {formik.touched.nationality && formik.errors.nationality ? (
+                <div className="text-red-500 text-sm mt-1">{formik.errors.nationality}</div>
+              ) : null}
+            </div>
 
-//         <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
-//           {({ errors, touched, setFieldValue, values }) => (
-//             <Form className="space-y-6">
-              
-//               {/* Name Fields */}
-//               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-//                 <div>
-//                   <label htmlFor="firstName" className="flex items-center gap-2 text-sm font-medium text-[#242058]">
-//                     <User className="w-4 h-4 text-[#d8a16f]" /> First Name *
-//                   </label>
-//                   <Field
-//                     id="firstName"
-//                     name="firstName"
-//                     placeholder="Enter your first name"
-//                     className={`w-full h-12 px-3 rounded-lg border ${errors.firstName && touched.firstName ? "border-red-500" : "border-slate-300 focus:border-[#d8a16f] focus:ring-2 focus:ring-[#d8a16f]/20"} transition-colors`}
-//                   />
-//                   <ErrorMessage name="firstName" component="p" className="text-sm text-red-500 mt-1" />
-//                 </div>
+            {/* Investment Feasibility */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-3">
+                Is an investment starting at $123,000 feasible for you? <span className='text-red-500'>*</span>
+              </label>
+              <div className="space-y-2">
+                <label className="flex items-center">
+                  <input
+                    type="radio"
+                    name="investmentFeasible"
+                    value="yes"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    checked={formik.values.investmentFeasible === 'yes'}
+                    className="text-[#d8a16f] focus:ring-[#d8a16f]"
+                  />
+                  <span className="ml-2">Yes</span>
+                </label>
+                <label className="flex items-center">
+                  <input
+                    type="radio"
+                    name="investmentFeasible"
+                    value="no"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    checked={formik.values.investmentFeasible === 'no'}
+                    className="text-[#d8a16f] focus:ring-[#d8a16f]"
+                  />
+                  <span className="ml-2">No</span>
+                </label>
+              </div>
+              {formik.touched.investmentFeasible && formik.errors.investmentFeasible ? (
+                <div className="text-red-500 text-sm mt-1">{formik.errors.investmentFeasible}</div>
+              ) : null}
+            </div>
 
-//                 <div>
-//                   <label htmlFor="lastName" className="flex items-center gap-2 text-sm font-medium text-[#242058]">
-//                     <User className="w-4 h-4 text-[#d8a16f]" /> Last Name *
-//                   </label>
-//                   <Field
-//                     id="lastName"
-//                     name="lastName"
-//                     placeholder="Enter your last name"
-//                     className={`w-full h-12 px-3 rounded-lg border ${errors.lastName && touched.lastName ? "border-red-500" : "border-slate-300 focus:border-[#d8a16f] focus:ring-2 focus:ring-[#d8a16f]/20"} transition-colors`}
-//                   />
-//                   <ErrorMessage name="lastName" component="p" className="text-sm text-red-500 mt-1" />
-//                 </div>
-//               </div>
+            {/* Submit Button */}
+            <div>
+              <button
+                type="submit"
+                className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#242058] hover:bg-[#1a1845] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#d8a16f] transition-colors duration-200"
+              >
+                Submit Inquiry
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+};
 
-//               {/* Phone */}
-//               <div>
-//                 <label className="flex items-center gap-2 text-sm font-medium text-[#242058]">
-//                   <Phone className="w-4 h-4 text-[#d8a16f]" /> Phone/Mobile *
-//                 </label>
-//                 <div className="flex gap-2">
-//                   <select
-//                     value={values.countryCode}
-//                     onChange={(e) => setFieldValue("countryCode", e.target.value)}
-//                     className={`w-28 h-12 rounded-lg border ${errors.countryCode && touched.countryCode ? "border-red-500" : "border-slate-300 focus:border-[#d8a16f] focus:ring-2 focus:ring-[#d8a16f]/20"} transition-colors`}
-//                   >
-//                     <option value="">🌍</option>
-//                     {countries.map((c) => (
-//                       <option key={`${c.iso2}-${c.code}`} value={c.code}>
-//                         {c.flag} {c.code}
-//                       </option>
-//                     ))}
-//                   </select>
-//                   <Field
-//                     name="phone"
-//                     placeholder="Mobile Number"
-//                     className={`flex-1 h-12 px-3 rounded-lg border ${errors.phone && touched.phone ? "border-red-500" : "border-slate-300 focus:border-[#d8a16f] focus:ring-2 focus:ring-[#d8a16f]/20"} transition-colors`}
-//                   />
-//                 </div>
-//                 <div className="flex justify-between">
-//                   <ErrorMessage name="phone" component="p" className="text-sm text-red-500 mt-1" />
-//                   <ErrorMessage name="countryCode" component="p" className="text-sm text-red-500 mt-1" />
-//                 </div>
-//               </div>
-
-//               {/* Email */}
-//               <div>
-//                 <label htmlFor="email" className="flex items-center gap-2 text-sm font-medium text-[#242058]">
-//                   <Mail className="w-4 h-4 text-[#d8a16f]" /> Email *
-//                 </label>
-//                 <Field
-//                   id="email"
-//                   name="email"
-//                   type="email"
-//                   placeholder="you@domain.com"
-//                   className={`w-full h-12 px-3 rounded-lg border ${errors.email && touched.email ? "border-red-500" : "border-slate-300 focus:border-[#d8a16f] focus:ring-2 focus:ring-[#d8a16f]/20"} transition-colors`}
-//                 />
-//                 <ErrorMessage name="email" component="p" className="text-sm text-red-500 mt-1" />
-//               </div>
-
-//               {/* Nationality */}
-//               <div>
-//                 <label className="flex items-center gap-2 text-sm font-medium text-[#242058]">
-//                   <Globe className="w-4 h-4 text-[#d8a16f]" /> Nationality *
-//                 </label>
-//                 <select
-//                   value={values.nationality}
-//                   onChange={(e) => setFieldValue("nationality", e.target.value)}
-//                   className={`w-full h-12 rounded-lg border ${errors.nationality && touched.nationality ? "border-red-500" : "border-slate-300 focus:border-[#d8a16f] focus:ring-2 focus:ring-[#d8a16f]/20"} transition-colors px-3`}
-//                 >
-//                   <option value="">Select your nationality</option>
-//                   {nationalities.map((n) => (
-//                     <option key={n} value={n}>{n}</option>
-//                   ))}
-//                 </select>
-//                 <ErrorMessage name="nationality" component="p" className="text-sm text-red-500 mt-1" />
-//               </div>
-
-//               {/* Investment */}
-//               <div>
-//                 <label className="flex items-center gap-2 text-sm font-medium text-[#242058]">
-//                   <DollarSign className="w-4 h-4 text-[#d8a16f]" /> Is an investment starting at $123,000 feasible for you? *
-//                 </label>
-//                 <select
-//                   value={values.investmentFeasible}
-//                   onChange={(e) => setFieldValue("investmentFeasible", e.target.value)}
-//                   className={`w-full h-12 rounded-lg border ${errors.investmentFeasible && touched.investmentFeasible ? "border-red-500" : "border-slate-300 focus:border-[#d8a16f] focus:ring-2 focus:ring-[#d8a16f]/20"} transition-colors px-3`}
-//                 >
-//                   <option value="">Please select an option</option>
-//                   <option value="yes">Yes, I'm interested</option>
-//                   <option value="maybe">Maybe, I'd like to learn more</option>
-//                   <option value="no">No, looking for smaller amounts</option>
-//                   <option value="higher">I'm interested in higher amounts</option>
-//                 </select>
-//                 <ErrorMessage name="investmentFeasible" component="p" className="text-sm text-red-500 mt-1" />
-//               </div>
-
-//               {/* Message */}
-//               <div>
-//                 <label htmlFor="message" className="flex items-center gap-2 text-sm font-medium text-[#242058]">
-//                   <MessageSquare className="w-4 h-4 text-[#d8a16f]" /> Additional Message (Optional)
-//                 </label>
-//                 <Field
-//                   as="textarea"
-//                   id="message"
-//                   name="message"
-//                   placeholder="Tell us more..."
-//                   className="w-full min-h-[120px] px-3 py-2 rounded-lg border border-slate-300 focus:border-[#d8a16f] focus:ring-2 focus:ring-[#d8a16f]/20 resize-none transition-colors"
-//                 />
-//               </div>
-
-//               {/* Submit */}
-//               <button
-//                 type="submit"
-//                 disabled={isSubmitting}
-//                 className="w-full h-12 bg-[#242058] hover:bg-[#d8a16f] text-white font-semibold text-lg rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center disabled:opacity-70 disabled:cursor-not-allowed"
-//               >
-//                 {isSubmitting ? (
-//                   <>
-//                     <Loader2 className="w-5 h-5 mr-2 animate-spin" />
-//                     Submitting Request...
-//                   </>
-//                 ) : (
-//                   "Submit Request"
-//                 )}
-//               </button>
-//             </Form>
-//           )}
-//         </Formik>
-//       </div>
-//     </div>
-//   )
-// }
+export default CallbackForm;

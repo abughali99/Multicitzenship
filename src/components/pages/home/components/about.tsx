@@ -19,7 +19,7 @@ export const AboutUs = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-3xl sm:text-5xl md:text-6xl font-bold mb-4"
+          className="text-3xl sm:text-5xl md:text-6xl font-bold mb-4 text-[#242058]"
         >
           About Our Company
         </motion.h2>

@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { Button } from "./button";
 import { X } from "lucide-react";
+import CallbackForm from "../pages/home/components/request-form";
 
 export const PobUp = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -19,16 +20,14 @@ export const PobUp = () => {
 
             {isPopupOpen && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white dark:bg-card rounded-lg shadow-xl max-w-md w-full p-6 relative">
-            {/* Close button */}
+          <div className=" md:max-w-1/2 w-full   relative bg-white rounded-2xl p-4">
             <button
               onClick={closePopup}
-              className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 cursor-pointer"
+              className=" top-4 right-4 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 cursor-pointer"
             >
               <X size={20} />
             </button>
-         {/* <CallbackForm/> */}
-        
+         <CallbackForm/>
           </div>
         </div>
       )}

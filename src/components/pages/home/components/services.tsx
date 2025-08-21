@@ -19,9 +19,9 @@ export const Services = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-[#7B7B7B] text-3xl sm:text-5xl md:text-6xl font-bold mb-4"
+          className="text-[#242058] text-3xl sm:text-5xl md:text-6xl font-bold mb-4"
         >
-          Services We <span className="text-[#4E489D]">Offer</span>
+          Services We <span className="text-[#d8a16f]">Offer</span>
         </motion.h2>
 
         <motion.p
