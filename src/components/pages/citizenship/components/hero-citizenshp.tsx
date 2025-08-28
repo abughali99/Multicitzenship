@@ -14,7 +14,7 @@ export const HeroCitizenship = () => {
 
         <div className="max-w-7xl mx-auto px-4 flex flex-col justify-center items-center text-center relative z-10">
           <h1 className="text-white text-5xl md:text-7xl font-bold mb-6 leading-tight">
-            Citizenship By 
+            Citizenship By {" "}
              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#d8a16f] to-[#d8a16f]">
                Investment
             </span>

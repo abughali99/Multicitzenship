@@ -34,15 +34,84 @@ export default function EnhancedHeader() {
     { 
       label: "Programs", 
       dropdown: [
-        { href: "/citizenship", label: "Citizenship By Investment" },
-        { href: "/residency", label: "Residency By Investment" }
+        { 
+          label: "Citizenship By Investment", 
+          dropdown: [
+            { href: "/citizenship/caribbean", label: "Caribbean Citizenship" },
+            { href: "/citizenship/europe", label: "European Citizenship" },
+            { href: "/citizenship/asia", label: "Asian Citizenship" },
+            { href: "/citizenship/compare", label: "Compare Programs" }
+          ]
+        },
+        { 
+          href: "/residency", 
+          label: "Residency By Investment",
+          dropdown: [
+            { href: "/residency/europe", label: "European Residency" },
+            { href: "/residency/usa", label: "USA Residency" },
+            { href: "/residency/uk", label: "UK Residency" }
+          ]
+        }
       ]
     },
     { href: "/blog", label: "Blog & News" },
     { href: "/contact-us", label: "Contact Us" },
   ]
 
-
+  // Recursive function to render dropdowns
+  const renderDropdown = (items, isMobile = false, level = 0) => {
+    return items.map((item) => {
+      if (item.dropdown) {
+        if (isMobile) {
+          return (
+            <div key={item.label} className={`py-2 ${level > 0 ? 'pl-4' : ''}`}>
+              <h3 className="text-gray-700 font-medium py-2 px-2">{item.label}</h3>
+              <div className="pl-4 space-y-1">
+                {renderDropdown(item.dropdown, true, level + 1)}
+              </div>
+            </div>
+          )
+        } else {
+          return (
+            <DropdownMenu key={item.label}>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="ghost"
+                  className="text-gray-700 hover:text-[#242058] text-2xm transition-all duration-200 relative group py-2 font-bold flex items-center gap-1"
+                >
+                  {item.label}
+                  <ChevronDown className="w-4 h-4" />
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#242058] transition-all duration-300 group-hover:w-full"></span>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="start" className="w-48">
+                {renderDropdown(item.dropdown)}
+              </DropdownMenuContent>
+            </DropdownMenu>
+          )
+        }
+      } else {
+        if (isMobile) {
+          return (
+            <Link
+              key={item.href || item.label}
+              href={item.href || "#"}
+              className={`text-gray-600 hover:text-[#242058] hover:bg-gray-50 font-medium py-2 px-2 rounded-lg transition-all duration-200 block ${level > 0 ? 'pl-6' : ''}`}
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              {item.label}
+            </Link>
+          )
+        } else {
+          return (
+            <DropdownMenuItem key={item.href || item.label} asChild>
+              <Link href={item.href || "#"}>{item.label}</Link>
+            </DropdownMenuItem>
+          )
+        }
+      }
+    })
+  }
 
   return (
     <>
@@ -111,25 +180,7 @@ export default function EnhancedHeader() {
             <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
               {navigationItems.map((item) => (
                 item.dropdown ? (
-                  <DropdownMenu key={item.label}>
-                    <DropdownMenuTrigger asChild>
-                      <Button
-                        variant="ghost"
-                        className="text-gray-700 hover:text-[#242058] text-2xm transition-all duration-200 relative group py-2 font-bold flex items-center gap-1"
-                      >
-                        {item.label}
-                        <ChevronDown className="w-4 h-4" />
-                        <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#242058] transition-all duration-300 group-hover:w-full"></span>
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="start" className="w-48">
-                      {item.dropdown.map((dropdownItem) => (
-                        <DropdownMenuItem key={dropdownItem.href} asChild>
-                          <Link href={dropdownItem.href}>{dropdownItem.label}</Link>
-                        </DropdownMenuItem>
-                      ))}
-                    </DropdownMenuContent>
-                  </DropdownMenu>
+                  renderDropdown([item])
                 ) : (
                   <Link
                     key={item.href}
@@ -141,10 +192,6 @@ export default function EnhancedHeader() {
                   </Link>
                 )
               ))}
-              
-         
-
-            
             </nav>
 
             {/* Right Side Actions */}
@@ -233,21 +280,7 @@ export default function EnhancedHeader() {
               <nav className="flex flex-col space-y-1">
                 {navigationItems.map((item) => (
                   item.dropdown ? (
-                    <div key={item.label} className="py-2">
-                      <h3 className="text-gray-700 font-medium py-2 px-2">{item.label}</h3>
-                      <div className="pl-4 space-y-1">
-                        {item.dropdown.map((dropdownItem) => (
-                          <Link
-                            key={dropdownItem.href}
-                            href={dropdownItem.href}
-                            className="text-gray-600 hover:text-[#242058] hover:bg-gray-50 font-medium py-2 px-2 rounded-lg transition-all duration-200 block"
-                            onClick={() => setIsMobileMenuOpen(false)}
-                          >
-                            {dropdownItem.label}
-                          </Link>
-                        ))}
-                      </div>
-                    </div>
+                    renderDropdown([item], true)
                   ) : (
                     <Link
                       key={item.href}
@@ -259,10 +292,6 @@ export default function EnhancedHeader() {
                     </Link>
                   )
                 ))}
-                
-
-                
-         
               </nav>
 
               {/* Mobile Menu Actions */}
