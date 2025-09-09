@@ -1,18 +1,23 @@
+"use client";
+
 import {
   BarChart,
   Clock,
   Globe,
   Globe2,
+  Handshake,
   MapPin,
   Plane,
+  Rocket,
   Shield,
   Users,
   Users2,
   Workflow,
 } from "lucide-react";
+import { motion } from "framer-motion";
 
 export const AboutSaintKitts = () => {
-  const featuresData = [
+const featuresData = [
     {
       id: 1,
       icon: Globe2,
@@ -56,33 +61,95 @@ export const AboutSaintKitts = () => {
         "St. Kitts & Nevis imposes no taxes on worldwide income, ensuring financial advantages",
     },
   ];
+
+  // Animation variants
+  const fadeInUp = {
+    initial: { opacity: 0, y: 30 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.7, ease: "easeOut" }
+  };
+
+  const staggerContainer = {
+    animate: {
+      transition: {
+        staggerChildren: 0.15
+      }
+    }
+  };
+
   return (
     <>
-      <section className="">
+      {/* Overview Section */}
+      <motion.section 
+        className=""
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+      >
         <div className="max-w-7xl mx-auto px-4 py-12">
-          <h2 className="text-6xl font-bold mb-6 text-center text-[#242058]">
+          <motion.h2 
+            className="text-6xl font-bold mb-6 text-center text-[#242058]"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+          >
             Overview
-          </h2>
-          <p className="text-lg leading-relaxed mb-6 text-center">
-            St. Kitts was once known as the Gibraltar of the West Indies for its
+          </motion.h2>
+          <motion.p 
+            className="text-lg leading-relaxed mb-6 text-center max-w-4xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.4 }}
+          >
+       St. Kitts was once known as the Gibraltar of the West Indies for its
             domination of 18th- century colonial battles. Its official name is
             The Federation of Saint Christopher (St. Kitts and Nevis), while its
             known by the name of St Kitts & Nevis, the capital of St Kitts is
             Basseterre holding a Kittitian nationality, and the capital of Nevis
             is Charlestown holding a Nevisian nationality.
-          </p>
+
+          </motion.p>
         </div>
-      </section>
-      <section className="">
+      </motion.section>
+
+      {/* Why Choose Section */}
+      <motion.section 
+        className=""
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+      >
         <div className="max-w-7xl mx-auto px-4 py-12">
-          <h2 className="text-6xl font-bold mb-6 text-center text-[#242058]">
+          <motion.h2 
+            className="text-6xl font-bold mb-6 text-center text-[#242058]"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+          >
             Why Choose{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#d8a16f] to-[#d8a16f]">
-              SAINT St Kitts & Nevis?
-            </span>
-          </h2>
-          <p className="text-lg leading-relaxed mb-6 text-center">
-            St. Kitts and Nevis is fast-becoming a magnet for Foreign Direct
+            <motion.span 
+              className="text-transparent bg-clip-text bg-gradient-to-r from-[#d8a16f] to-[#d8a16f]"
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.4 }}
+            >
+            SAINT St Kitts & Nevis?
+            </motion.span>
+          </motion.h2>
+          <motion.p 
+            className="text-lg leading-relaxed mb-6 text-center max-w-4xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.4 }}
+          >
+           St. Kitts and Nevis is fast-becoming a magnet for Foreign Direct
             Investment (FDI) in key sectors, such as tourism-related real
             estate, financial services and offshore education–medical university
             institutions, primarily. St. Kitts & Nevis recognizes dual
@@ -90,66 +157,113 @@ export const AboutSaintKitts = () => {
             current passports. As a pioneer in the field, the St. Kitts & Nevis
             Citizenship by Investment Program brings forth a range of distinct
             benefits for applicants:
-          </p>
-          <section className="cards">
-            <section className="py-20">
-              <div className="container mx-auto px-4">
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-8">
-                  {featuresData.map((feature) => {
-                    const IconComponent = feature.icon;
-                    return (
-                      <div
-                        key={feature.id}
-                        className="text-center shadow-lg p-8 hover:shadow-lg transition-shadow rounded-lg border border-gray-200"
-                      >
-                        <div>
-                          <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <IconComponent className="w-8 h-8 text-[#242058]" />
-                          </div>
-                          <div className="text-xl text-[#d8a16f] font-bold">
-                            {feature.title}
-                          </div>
-                        </div>
-                        <div>
-                          <p className="text-muted-foreground">
-                            {feature.description}
-                          </p>
+
+          </motion.p>
+          
+          <motion.section 
+            className="cards"
+            variants={staggerContainer}
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true }}
+          >
+            <div className="container mx-auto px-4">
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-8">
+                {featuresData.map((feature, index) => {
+                  const IconComponent = feature.icon;
+                  return (
+                    <motion.div
+                      key={feature.id}
+                      className="text-center shadow-lg p-8 hover:shadow-xl transition-shadow rounded-lg border border-gray-200"
+                      variants={fadeInUp}
+                      whileHover={{ y: -5, scale: 1.02 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                    >
+                      <div>
+                        <motion.div 
+                          className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4"
+                          initial={{ scale: 0.8, opacity: 0 }}
+                          whileInView={{ scale: 1, opacity: 1 }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
+                        >
+                          <IconComponent className="w-8 h-8 text-[#242058]" />
+                        </motion.div>
+                        <div className="text-xl text-[#d8a16f] font-bold">
+                          {feature.title}
                         </div>
                       </div>
-                    );
-                  })}
-                </div>
+                      <div>
+                        <p className="text-muted-foreground mt-3">
+                          {feature.description}
+                        </p>
+                      </div>
+                    </motion.div>
+                  );
+                })}
               </div>
-            </section>
-          </section>
+            </div>
+          </motion.section>
         </div>
-      </section>
-      <section className="qualification">
+      </motion.section>
+
+      {/* Qualification Section */}
+      <motion.section 
+        className="qualification"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+      >
         <div className="max-w-7xl mx-auto px-4 py-12">
-          <h2 className="text-6xl font-bold mb-6 text-center text-[#242058]">
+          <motion.h2 
+            className="text-6xl font-bold mb-6 text-center text-[#242058]"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+          >
             Qualification
-          </h2>
-          <p className="text-lg leading-relaxed mb-6 text-center">
-           To be eligible for citizenship in St. Kitts & Nevis, applicants must meet one of the investment criteria outlined below, in addition to satisfying the following prerequisites:
-          </p>
-          <div className="">
-            <ul className="list-disc list-inside text-lg space-y-2 marker:text-[#d8a16f] marker:text-3xl">
-              <li className="mt-4 font-semibold text-lg">
-                Good Character: Applicants must be known for their good behavior
-              </li>
-              <li className="mt-4 font-semibold text-lg">
-              No Criminal Record: A clean history without any criminal record is essential
-              </li>
-              <li className="mt-4 font-semibold text-lg">
-              Good Health: Applicants should be in good physical condition
-              </li>
-              <li className="mt-4 font-semibold text-lg">
-                Demonstrate a substantial personal net worth
-              </li>
-            </ul>
-          </div>
+          </motion.h2>
+          <motion.p 
+            className="text-lg leading-relaxed mb-6 text-center max-w-full mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.4 }}
+          >
+            To be eligible for citizenship in St. Kitts & Nevis, applicants must meet one of the investment criteria outlined below, in addition to satisfying the following prerequisites:
+
+          </motion.p>
+          
+          <motion.ul 
+            className="list-disc list-inside text-lg space-y-2 marker:text-[#d8a16f] marker:text-3xl max-w-full mx-auto"
+            variants={staggerContainer}
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true }}
+          >
+            {[
+              "Demonstrate a substantial personal net worth",
+              "Good Character: Applicants must be known for their good behavior",
+              "No Criminal Record: A clean history without any criminal record is essential",
+              "Good Health: Applicants should be in good physical condition",
+            ].map((item, index) => (
+              <motion.li 
+                key={index}
+                className="mt-4 font-semibold text-lg pl-4"
+                variants={fadeInUp}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.2 + index * 0.15 }}
+              >
+                {item}
+              </motion.li>
+            ))}
+          </motion.ul>
         </div>
-      </section>
+      </motion.section>
     </>
   );
 };

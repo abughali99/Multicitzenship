@@ -228,7 +228,7 @@ export const AboutAntiguaBarbuda = () => {
             Qualification
           </motion.h2>
           <motion.p 
-            className="text-lg leading-relaxed mb-6 text-center max-w-4xl mx-auto"
+            className="text-lg leading-relaxed mb-6 text-center max-w-full mx-auto"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -240,7 +240,7 @@ export const AboutAntiguaBarbuda = () => {
           </motion.p>
           
           <motion.ul 
-            className="list-disc list-inside text-lg space-y-2 marker:text-[#d8a16f] marker:text-3xl max-w-3xl mx-auto"
+            className="list-disc list-inside text-lg space-y-2 marker:text-[#d8a16f] marker:text-3xl max-w-full mx-auto"
             variants={staggerContainer}
             initial="initial"
             whileInView="animate"
