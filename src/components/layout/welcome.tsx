@@ -34,11 +34,11 @@ export const Loading = () => {
       {
         yPercent: 0,
         opacity: 1,
-        duration: 2,
+        duration: 1.2, // Reduced from 2s
         ease: "text-ease",
         stagger: {
           from: "start",
-          amount: 0.1,
+          amount: 0.05, // Reduced stagger amount
         },
         rotate: 0,
         paused: true,
@@ -57,11 +57,11 @@ export const Loading = () => {
         yPercent: 150,
         opacity: 0,
         rotate: 5,
-        duration: 2,
+        duration: 1.2, // Reduced from 2s
         ease: "text-ease",
         stagger: {
           from: "end",
-          amount: 0.1,
+          amount: 0.05, // Reduced stagger amount
         },
         paused: true,
       }
@@ -74,15 +74,15 @@ export const Loading = () => {
     });
 
     heroTl
-      .to(".loadhide", { opacity: 0, duration: 0.3 })
+      .to(".loadhide", { opacity: 0, duration: 0.2 }) // Reduced from 0.3s
       .add(loaderShow.play())
-      .to(".loadingstatus", { opacity: 0, duration: 0.3 })
-      .add(loaderHide.play(), "+=1")
+      .to(".loadingstatus", { opacity: 0, duration: 0.2 }) // Reduced from 0.3s
+      .add(loaderHide.play(), "+=0.5") // Reduced delay from 1s
       .to(".fullloader", {
         display: "none",
         duration: 0,
         onComplete: () => {
-          document.body.style.overflow = "auto"; // ✅ Re-enable scrolling here
+          document.body.style.overflow = "auto";
         },
       });
   });
@@ -104,7 +104,7 @@ export const Loading = () => {
                 width={300}
                 height={100}
                 alt="logo"
-                className="animate-pulse duration-1000"
+                className="animate-pulse duration-700" // Reduced from 1000ms
               />
               <h1>Welcome To Multicitzenships</h1>
             </div>
@@ -116,7 +116,7 @@ export const Loading = () => {
               viewBox="0 0 100 101"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              style={{ animationDuration: "0.5s" }}
+              style={{ animationDuration: "0.3s" }} // Reduced from 0.5s
             >
               <path
                 d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
@@ -127,7 +127,7 @@ export const Loading = () => {
                 fill="currentFill"
               />
             </svg>
-            <span className="ml-2 animate-pulse" style={{ animationDuration: "1s" }}>
+            <span className="ml-2 animate-pulse" style={{ animationDuration: "0.7s" }}> {/* Reduced from 1s */}
               Loading...
             </span>
           </div>
