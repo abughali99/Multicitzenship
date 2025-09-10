@@ -7,7 +7,7 @@ import { AppUAE } from "@/components/pages/uae/app-uae";
 export default function Hungary() {
   return (
     <>
-    <AppGreece/>
+    <AppHungary/>
     </>
   )
 }   

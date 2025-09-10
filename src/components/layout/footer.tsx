@@ -30,7 +30,7 @@ export const Footer = () => {
             {
               "Multicitizenships enables individuals and families to attain Global Citizenship by making investments in second residency and citizenship programs worldwide. "
             }
-            <Link href="#" className="text-white hover:text-[#d8a16f]">
+            <Link href="/aboutus" className="text-white hover:text-[#d8a16f]">
               Read more
             </Link>
           </p>
@@ -41,22 +41,22 @@ export const Footer = () => {
           <h3 className="font-semibold text-lg mb-4 pb-1 border-b-2 border-[#d8a16f] inline-block">Quick Links</h3>
           <ul className="space-y-2 text-sm">
             <li>
-              <Link href="#" className="hover:text-[#d8a16f]">
+              <Link href="/aboutus" className="hover:text-[#d8a16f]">
                 About Us
               </Link>
             </li>
             <li>
-              <Link href="#" className="hover:text-[#d8a16f]">
+              <Link href="/contact-us" className="hover:text-[#d8a16f]">
                 Contact Us
               </Link>
             </li>
             <li>
-              <Link href="#" className="hover:text-[#d8a16f]">
+              <Link href="/citizenship" className="hover:text-[#d8a16f]">
                 Citizenship by Investment
               </Link>
             </li>
             <li>
-              <Link href="#" className="hover:text-[#d8a16f]">
+              <Link href="/residency" className="hover:text-[#d8a16f]">
                 Residency by Investment
               </Link>
             </li>
@@ -87,18 +87,6 @@ export const Footer = () => {
               Amman- Jordan |{" "}
               <Link href="tel:+962770088880" className="hover:text-[#d8a16f]">
                 +962 77 008 8880
-              </Link>
-            </li>
-            <li>
-              Riyadh- KSA |{" "}
-              <Link href="tel:+966548044243" className="hover:text-[#d8a16f]">
-                +966 54 8044243
-              </Link>
-            </li>
-            <li>
-              Dubai- UAE |{" "}
-              <Link href="tel:+971565747350" className="hover:text-[#d8a16f]">
-                +971 56 5747350
               </Link>
             </li>
             <li>
@@ -136,37 +124,42 @@ export const Footer = () => {
         </div>
         <div className="flex space-x-4">
           <Link
-            href="#"
+            href="https://www.facebook.com/multicitizenships1/"
             className="w-10 h-10 flex items-center justify-center rounded-full bg-white text-[#1A1A3A] hover:bg-gray-200 transition-colors"
             aria-label="Facebook"
+            target="_blank"
           >
             <Facebook className="w-5 h-5" />
           </Link>
           <Link
-            href="#"
+            href="https://www.instagram.com/multicitizenships/"
             className="w-10 h-10 flex items-center justify-center rounded-full bg-white text-[#1A1A3A] hover:bg-gray-200 transition-colors"
             aria-label="Instagram"
+            target="_blank"
           >
             <Instagram className="w-5 h-5" />
           </Link>
           <Link
-            href="#"
+            href="https://www.linkedin.com/company/multicitizenships"
             className="w-10 h-10 flex items-center justify-center rounded-full bg-white text-[#1A1A3A] hover:bg-gray-200 transition-colors"
             aria-label="LinkedIn"
+            target="_blank"
           >
             <Linkedin className="w-5 h-5" />
           </Link>
           <Link
-            href="#"
+            href="https://x.com/multicitize"
             className="w-10 h-10 flex items-center justify-center rounded-full bg-white text-[#1A1A3A] hover:bg-gray-200 transition-colors"
             aria-label="Twitter"
+            target="_blank"
           >
             <X className="w-5 h-5" />
           </Link>
           <Link
-            href="#"
+            href="https://www.youtube.com/@MultiCitizenships"
             className="w-10 h-10 flex items-center justify-center rounded-full bg-white text-[#1A1A3A] hover:bg-gray-200 transition-colors"
             aria-label="YouTube"
+            target="_blank"
           >
             <Youtube className="w-5 h-5" />
           </Link>

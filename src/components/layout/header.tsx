@@ -38,11 +38,10 @@ export default function EnhancedHeader() {
   }, []);
 
   const socialLinks = [
-    { icon: Facebook, href: "#", label: "Facebook" },
-    { icon: Instagram, href: "#", label: "Instagram" },
-    { icon: Youtube, href: "#", label: "YouTube" },
-    { icon: Twitter, href: "#", label: "Twitter" },
-    { icon: MessageCircle, href: "#", label: "WhatsApp" },
+    { icon: Facebook, href: "https://www.facebook.com/multicitizenships1/", label: "Facebook" },
+    { icon: Instagram, href: "https://www.instagram.com/multicitizenships/", label: "Instagram" },
+    { icon: Youtube, href: "https://www.youtube.com/@MultiCitizenships", label: "YouTube" },
+    { icon: Twitter, href: "https://x.com/multicitize", label: "Twitter" },
   ];
 
   const navigationItems = [
@@ -88,9 +87,9 @@ export default function EnhancedHeader() {
             <span className="text-xs sm:text-sm font-medium">
               {"Let's Have Quick Chat on"}
             </span>
-            <Button
-              size="sm"
-              className="bg-[#00c950] text-[#242058] hover:bg-gray-100 hover:scale-105 transition-all duration-200 h-8 px-3 rounded-full shadow-sm"
+            <a
+              href="https://wa.me/+96291929995" target="_blank"
+              className="bg-[#00c950] text-[#242058] hover:bg-gray-100 hover:scale-105 transition-all duration-200 h-8 px-3 rounded-full shadow-sm flex items-center gap-2"
             >
               <svg
                 width="24"
@@ -104,10 +103,8 @@ export default function EnhancedHeader() {
               <span className="hidden sm:inline text-xs font-medium text-white">
                 WhatsApp
               </span>
-              <span className="sm:hidden text-xs font-medium text-white">
-                Chat
-              </span>
-            </Button>
+        
+            </a>
           </div>
 
           <div className="flex items-center gap-1.5 sm:gap-2">
@@ -117,19 +114,12 @@ export default function EnhancedHeader() {
                 href={href}
                 className="w-6 h-6 sm:w-7 sm:h-7 bg-white/90 hover:bg-white rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 group"
                 aria-label={label}
+                target="_blank"
               >
                 <Icon className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#242058] group-hover:text-[#242058] transition-colors" />
               </Link>
             ))}
-            <Link
-              href="#"
-              className="w-6 h-6 sm:w-7 sm:h-7 bg-white/90 hover:bg-white rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 group"
-              aria-label="Google"
-            >
-              <span className="text-[#242058] group-hover:text-[#242058] text-xs font-bold transition-colors">
-                G
-              </span>
-            </Link>
+      
           </div>
         </div>
       </div>
@@ -260,10 +250,10 @@ export default function EnhancedHeader() {
                   </DropdownMenuContent>
                 </DropdownMenu>
 
-                <Button className="bg-[#242058] hover:bg-[#2d2e5f] text-white transition-all duration-200 hover:scale-105 shadow-sm h-9">
+                {/* <Button className="bg-[#242058] hover:bg-[#2d2e5f] text-white transition-all duration-200 hover:scale-105 shadow-sm h-9">
                   <Phone className="w-4 h-4 mr-2" />
                   Get A Call Back
-                </Button>
+                </Button> */}
               </div>
 
               {/* Mobile Actions */}
